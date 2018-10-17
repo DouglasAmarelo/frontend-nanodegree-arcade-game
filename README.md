@@ -2,15 +2,16 @@
 
 ## Objective
 The objective of the game is to cross the river without the bugs being able to reach our character.
-Every time you get through, you earn points.
-But if the bugs can get you, you lose the points.
-During the crossing, you can find some prizes.
+Every time you get through, you earn points. If the bugs get you, you lose those points. During the crossing, you can find some collectible prizes.
 
 ## Where to play
-You can play the game in [this link](https://douglasamarelo.github.io/frontend-nanodegree-arcade-game/).
+You can play in [this link](https://douglasamarelo.github.io/frontend-nanodegree-arcade-game/) or if you prefer, you can download the game and, play locally in your computer.
+
+To play locally, you can click on "**clone or download**" button. After downloaded, you can unzip the folder and open the "**index.html**" file in any browser you prefer.
+
 
 ## How to play
-You can use your keyborad to play.
+You can use your keyboard to play.
 
 * **up ↑** go up
 * **right →** go to the right
@@ -18,5 +19,5 @@ You can use your keyborad to play.
 * **left ←** go to the left
 
 
-## Information
-My name is Douglas Lopes and, this is a project for the [Front End Web Developer nanodegree](https://br.udacity.com/course/front-end-web-developer-nanodegree--nd001-br-advanced) couse, by [Udacity](https://udacity.com).
+## Additional information
+My name is [Douglas Lopes](http://douglasamarelo.com/) and, this is a project for the [Front End Web Developer nanodegree](https://br.udacity.com/course/front-end-web-developer-nanodegree--nd001-br-advanced) course, by [Udacity](https://udacity.com).
