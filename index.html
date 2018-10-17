@@ -1,13 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Effective JavaScript: Frogger</title>
-    <link rel="stylesheet" href="css/style.css">
+	<meta charset="UTF-8">
+	<title>Effective JavaScript: Frogger</title>
+	<link href="https://fonts.googleapis.com/css?family=Orbitron:500" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/engine.js"></script>
+	<!-- Modal -->
+	<div class="modal">
+		<div class="modal__container">
+			<h2 class="modal__title">Choose your character</h2>
+
+			<!-- Characters -->
+			<form class="choose-character" action="#" method="POST">
+				<ul>
+					<li>
+						<input type="radio" name="character" id="boy" autofocus>
+						<label for="boy"><img src="images/char-boy.png" alt="boy" width="101" height="171"></label>
+					</li>
+					<li>
+						<input type="radio" name="character" id="girl">
+						<label for="girl"><img src="images/char-cat-girl.png" alt="girl" width="101" height="171"></label>
+					</li>
+				</ul>
+
+				<button class="choose" disabled="disabled">Start</button>
+			</form>
+			<!-- /Characters -->
+		</div>
+	</div>
+	<!-- /Modal -->
+
+	<div class="scores-container">
+		<!-- Score -->
+		<div class="score">
+			<strong>Score: <span class="score-number">0</span></strong>
+		</div>
+		<!-- /Score -->
+
+		<!-- Items -->
+		<div class="items">
+			<strong>Gems: <span class="items-number">0</span></strong>
+		</div>
+		<!-- /Items -->
+	</div>
+
+	<script src="js/sweetalert2.all.min.js"></script>
+	<script src="js/resources.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/engine.js"></script>
 </body>
 </html>
