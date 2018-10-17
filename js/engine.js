@@ -14,7 +14,7 @@
  */
 
  // Variables
-window.haracter = null;
+window.character = null;
 window.player = null;
 
 var Engine = (function(global) {

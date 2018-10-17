@@ -1,5 +1,5 @@
 // Helper
-function randomNumer(arr) {
+function randomNumber(arr) {
 	return Math.floor(Math.random() * arr.length);
 }
 
@@ -14,7 +14,7 @@ var objGems   = {
 	element: document.querySelector('.items-number'),
 	score: 0,
 	image: function() {
-		return arrGems[randomNumer(arrGems)]
+		return arrGems[randomNumber(arrGems)];
 	}
 };
 
@@ -23,20 +23,20 @@ var objGems   = {
 // Set a random position for the player
 function playerPosition() {
 	var playerInitialPosition = {
-		x: positionX[randomNumer(positionX)],
+		x: positionX[randomNumber(positionX)],
 		y: 400
 	};
 	return playerInitialPosition;
-};
+}
 
 // Set a random position for the gems
 function itemPosition() {
 	var itemRandomPosition = {
-		x: positionX[randomNumer(positionX)],
-		y: positionY[randomNumer(positionY)]
+		x: positionX[randomNumber(positionX)],
+		y: positionY[randomNumber(positionY)]
 	};
 	return itemRandomPosition;
-};
+}
 
 // Verify if the player and the enemy collided
 function checkCollisions(allEnemies, player) {
@@ -49,7 +49,7 @@ function checkCollisions(allEnemies, player) {
 			updateScore('error');
 		}
 	}
-};
+}
 
 // Verify if the player got the gem
 function checkCollisionsWithItems(item, player) {
@@ -57,7 +57,7 @@ function checkCollisionsWithItems(item, player) {
 		item.update();
 		updateGemScore();
 	}
-};
+}
 
 // Update the game score
 function updateScore(type) {
@@ -80,7 +80,7 @@ function updateScore(type) {
 	scoreEl.textContent = score;
 
 	animateScore(scoreEl.parentNode.parentNode, type);
-};
+}
 
 // Update the gems scores
 function updateGemScore() {
@@ -100,13 +100,36 @@ function animateScore(element, cssClass) {
 	}, 1000);
 }
 
+// Default class for the player and the enemies
+var Character = function(x, y, sprite) {
+	this.x =x;
+	this.y = y;
+	this.sprite = sprite;
+}
+
+Character.prototype.render = function() {
+	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+
 // Enemies our player must avoid
 var Enemy = function(x, y, sprite) {
+	Character.call(this, x, y, sprite);
+
 	this.x = x;
 	this.y = y;
-	this.sprite = sprite ? sprite : 'images/enemy-bug.png';
-	this.speed = arrSpeeds[randomNumer(arrSpeeds)];
+	this.speed = arrSpeeds[randomNumber(arrSpeeds)];
+	if (sprite) {
+		this.sprite = sprite;
+	}
+	else {
+		this.sprite = 'images/enemy-bug.png';
+	}
 };
+
+// Enemy derives from Character
+Enemy.prototype = Object.create(Character.prototype);
+Enemy.prototype.constructor = Enemy;
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -117,22 +140,28 @@ Enemy.prototype.update = function(dt) {
 	this.x += this.speed * dt;
 	if (this.x >= 505) {
 		this.x = 0;
-	};
-};
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+	}
 };
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function(x, y, sprite) {
-	this.x = x,
-	this.y = y,
-	this.sprite = sprite ? sprite : 'images/char-boy.png';
+	Character.call(this, x, y, sprite);
+
+	this.x = x;
+	this.y = y;
+	if (sprite) {
+		this.sprite = sprite;
+	}
+	else {
+		this.sprite = 'images/char-boy.png';
+	}
 };
+
+// Player derives from Character
+Player.prototype = Object.create(Character.prototype);
+Player.prototype.constructor = Player;
 
 Player.prototype.update = function() {
 	if (this.y <= 0) {
@@ -140,10 +169,6 @@ Player.prototype.update = function() {
 		this.y = playerPosition().y;
 		updateScore('success');
 	}
-};
-
-Player.prototype.render = function() {
-	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 Player.prototype.handleInput = function(key) {
@@ -165,21 +190,27 @@ Player.prototype.handleInput = function(key) {
 };
 
 var Items = function(x, y, sprite) {
-	this.x = x,
-	this.y = y,
-	this.sprite = sprite ? sprite : 'images/Gem-Blue.png';
+	Character.call(this, x, y, sprite);
+
+	this.x = x;
+	this.y = y;
+	if (sprite) {
+		this.sprite = sprite;
+	}
+	else {
+		this.sprite = 'images/Gem-Blue.png';
+	}
 };
+
+// Items derives from Character
+Items.prototype = Object.create(Character.prototype);
+Items.prototype.constructor = Items;
 
 Items.prototype.update = function() {
 	this.x = itemPosition().x;
 	this.y = itemPosition().y;
 	this.sprite = objGems.image();
 };
-
-Items.prototype.render = function() {
-	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
