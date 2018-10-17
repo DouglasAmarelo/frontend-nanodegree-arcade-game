@@ -72,7 +72,7 @@ function updateScore(type) {
 		score = 0;
 		swal(
 			'OH NOO!',
-			'You lost!!!',
+			'You lose!!!',
 			'error'
 		);
 	}
